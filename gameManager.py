@@ -34,6 +34,9 @@ class GameManager:
         self.font_big = pygame.font.SysFont(None, 36)
         self.font_small = pygame.font.SysFont(None, 28)
 
+        self.game_over_sound = pygame.mixer.Sound("assets/sounds/end_game.wav")
+        self.game_over_sound_played = False
+
     def ducks_in_round(self):
         return self.round_config[self.current_round]
 
@@ -74,6 +77,9 @@ class GameManager:
         self.gun.update()
 
         if self.gun.ammo == 0 and not self.gun.bullets:
+            if not self.game_over_sound_played:
+                self.game_over_sound.play()
+                self.game_over_sound_played = True
             self.state = "game_over"
 
     def draw(self, screen):
