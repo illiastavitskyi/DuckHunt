@@ -121,3 +121,11 @@ class GameManager:
             accuracy = 0 if self.shots == 0 else int((self.hits / self.shots) * 100)
             acc_text = self.font_small.render(f"Accuracy: {accuracy}%", True, (255, 255, 255))
             screen.blit(acc_text, (self.screen_width // 2 - acc_text.get_width() // 2, 180))
+
+            pygame.draw.rect(screen, (0, 200, 0), pygame.Rect(100, 230, 100, 40))
+            r_text = self.font_small.render("Restart", True, (0, 0, 0))
+            screen.blit(r_text, (115, 238))
+
+            pygame.draw.rect(screen, (200, 0, 0), pygame.Rect(210, 230, 100, 40))
+            q_text = self.font_small.render("Quit", True, (0, 0, 0))
+            screen.blit(q_text, (240, 238))
