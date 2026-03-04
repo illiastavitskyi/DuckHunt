@@ -25,6 +25,8 @@ font_big = pygame.font.SysFont(None, 36)
 font_small = pygame.font.SysFont(None, 28)
 
 button_rect = pygame.Rect(WINDOW_WIDTH // 2 - 50, WINDOW_HEIGHT // 2 + 20, 100, 40)
+restart_rect = pygame.Rect(100, 230, 100, 40)
+quit_rect = pygame.Rect(210, 230, 100, 40)
 
 
 def main():
@@ -33,22 +35,29 @@ def main():
 
     while running:
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
             if event.type == pygame.KEYDOWN and state == "menu":
                 if event.unicode.isdigit():
                     num = int(event.unicode)
                     if 1 <= num <= 5:
                         selected_rounds = num
-            if event.type == pygame.QUIT:
-                running = False
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if state == "menu" and button_rect.collidepoint(event.pos):
                     start_sound.play()
                     state = "game"
-                    gm = GameManager(WINDOW_WIDTH, WINDOW_HEIGHT,selected_rounds)
+                    gm = GameManager(WINDOW_WIDTH, WINDOW_HEIGHT, selected_rounds)
 
                 elif state == "game" and gm:
-                    gm.handle_click(event.pos)
+                    if gm.state == "game_over":
+                        if restart_rect.collidepoint(event.pos):
+                            gm = GameManager(WINDOW_WIDTH, WINDOW_HEIGHT, selected_rounds)
+                        elif quit_rect.collidepoint(event.pos):
+                            running = False
+                    else:
+                        gm.handle_click(event.pos)
 
         design.draw(WINDOW)
 
@@ -58,7 +67,7 @@ def main():
             pygame.draw.rect(WINDOW, (0, 200, 0), button_rect)
             go_text = font_small.render("GO", True, (0, 0, 0))
             WINDOW.blit(go_text, (button_rect.centerx - go_text.get_width() // 2,
-                                   button_rect.centery - go_text.get_height() // 2))
+                                  button_rect.centery - go_text.get_height() // 2))
             round_text = font_small.render(f"Rounds: {selected_rounds} (press 1-5 on keybord)", True, (255, 255, 255))
             WINDOW.blit(round_text, (WINDOW_WIDTH // 2 - round_text.get_width() // 2, 170))
 
