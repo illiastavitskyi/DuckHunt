@@ -121,3 +121,10 @@ class GameManager:
             accuracy = 0 if self.shots == 0 else int((self.hits / self.shots) * 100)
             acc_text = self.font_small.render(f"Accuracy: {accuracy}%", True, (255, 255, 255))
             screen.blit(acc_text, (self.screen_width // 2 - acc_text.get_width() // 2, 180))
+            restart_text = self.font_small.render(
+                "Press R to restart or X to exit", True, (255, 255, 255)
+            )
+            screen.blit(
+                restart_text,
+                (self.screen_width // 2 - restart_text.get_width() // 2, 220)
+            )

@@ -43,8 +43,13 @@ def main():
                     num = int(event.unicode)
                     if 1 <= num <= 5:
                         selected_rounds = num
-            if event.type == pygame.QUIT:
-                running = False
+
+            if event.type == pygame.KEYDOWN and state == "game" and gm and gm.state == "game_over":
+                if event.key == pygame.K_r:
+                    gm = GameManager(WINDOW_WIDTH, WINDOW_HEIGHT, selected_rounds)
+
+                if event.key == pygame.K_x:
+                    running = False
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if state == "menu" and button_rect.collidepoint(event.pos):
