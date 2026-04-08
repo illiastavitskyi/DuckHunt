@@ -36,5 +36,3 @@ class Duck:
     def is_hit(self, pos):
         duck_rect = pygame.Rect(self.x, self.y, 50, 50)
         return duck_rect.collidepoint(pos)
-    
-    
