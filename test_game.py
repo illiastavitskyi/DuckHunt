@@ -5,13 +5,13 @@ from gun import Gun
 from duck import Duck
 
 
-#FIXTURE
+# FIXTURE
 @pytest.fixture
 def gun():
     return Gun()
 
 
-#MOCKING
+# MOCKING
 def test_gun_shoot_decreases_ammo(gun):
     with patch("gun.Bullet") as MockBullet:
         gun.shoot((100, 100))
@@ -22,11 +22,14 @@ def test_gun_shoot_decreases_ammo(gun):
 
 
 # PARAMETRIZATION
-@pytest.mark.parametrize("duck_pos, shot_pos, expected", [
-    ((100, 100), (110, 110), True),   # вразив
-    ((100, 100), (200, 200), False),  # промах
-    ((50, 50), (55, 55), True),       # близько
-])
+@pytest.mark.parametrize(
+    "duck_pos, shot_pos, expected",
+    [
+        ((100, 100), (110, 110), True),
+        ((100, 100), (200, 200), False),
+        ((50, 50), (55, 55), True),
+    ],
+)
 def test_duck_is_hit(duck_pos, shot_pos, expected):
     duck = Duck(400, 400)
     duck.x, duck.y = duck_pos

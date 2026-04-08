@@ -3,6 +3,7 @@ from bullet import Bullet
 
 
 class Gun:
+
     def __init__(self):
         self.max_ammo = 5
         self.ammo = self.max_ammo
@@ -32,9 +33,9 @@ class Gun:
 
         for i in range(self.max_ammo):
             if i < self.ammo:
-                color = (255, 215, 0)   # патрон
+                color = (255, 215, 0)  # патрон
             else:
-                color = (100, 100, 100) # гільза
+                color = (100, 100, 100)  # гільза
 
             pygame.draw.rect(
                 screen,

@@ -4,7 +4,8 @@ from duck import Duck
 
 
 class GameManager:
-    def __init__(self, screen_width, screen_height,max_rounds):
+
+    def __init__(self, screen_width, screen_height, max_rounds):
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.max_rounds = max_rounds
@@ -36,7 +37,9 @@ class GameManager:
         self.font_big = pygame.font.SysFont(None, 36)
         self.font_small = pygame.font.SysFont(None, 28)
 
-        self.game_over_sound = pygame.mixer.Sound("assets/sounds/end_game.wav")
+        self.game_over_sound = pygame.mixer.Sound(
+            "assets/sounds/end_game.wav"
+        )
         self.game_over_sound_played = False
 
     def ducks_in_round(self):
@@ -71,8 +74,14 @@ class GameManager:
         if self.duck is None:
             if self.ducks_killed_in_round >= self.ducks_in_round():
                 self.next_round()
-            elif current_time - self.last_duck_spawn_time >= self.DUCK_SPAWN_DELAY:
-                self.duck = Duck(self.screen_width, self.screen_height)
+            elif (
+                current_time - self.last_duck_spawn_time
+                >= self.DUCK_SPAWN_DELAY
+            ):
+                self.duck = Duck(
+                    self.screen_width,
+                    self.screen_height
+                )
         else:
             if self.duck.alive:
                 self.duck.update()
@@ -86,46 +95,120 @@ class GameManager:
             self.state = "game_over"
             self.result = "lose"
 
-
     def draw(self, screen):
         if self.state == "playing":
             if self.duck and self.duck.alive:
                 self.duck.draw(screen)
+
             self.gun.draw(screen)
             self.gun.draw_ammo(screen)
+
             hud = self.font_small.render(
-                f"Round: {self.current_round}/{self.max_rounds}  Ducks: {self.ducks_killed_in_round}/{self.ducks_in_round()}",
-                True, (255, 255, 255)
+                (
+                    f"Round: {self.current_round}/{self.max_rounds}  "
+                    f"Ducks: {self.ducks_killed_in_round}/"
+                    f"{self.ducks_in_round()}"
+                ),
+                True,
+                (255, 255, 255)
             )
             screen.blit(hud, (10, 10))
 
         elif self.state == "game_over":
-            overlay = pygame.Surface((self.screen_width, self.screen_height))
+            overlay = pygame.Surface(
+                (self.screen_width, self.screen_height)
+            )
             overlay.set_alpha(180)
             overlay.fill((0, 0, 0))
             screen.blit(overlay, (0, 0))
 
             if self.result == "win":
-                result_text = self.font_big.render("YOU WIN", True, (80, 255, 80))
+                result_text = self.font_big.render(
+                    "YOU WIN",
+                    True,
+                    (80, 255, 80)
+                )
             else:
-                result_text = self.font_big.render("YOU LOSE", True, (255, 80, 80))
+                result_text = self.font_big.render(
+                    "YOU LOSE",
+                    True,
+                    (255, 80, 80)
+                )
 
-            screen.blit(result_text, (self.screen_width // 2 - result_text.get_width() // 2, 60))
+            screen.blit(
+                result_text,
+                (
+                    self.screen_width // 2
+                    - result_text.get_width() // 2,
+                    60
+                )
+            )
 
-            title = self.font_big.render("GAME OVER", True, (255, 255, 255))
-            screen.blit(title, (self.screen_width // 2 - title.get_width() // 2, 100))
+            title = self.font_big.render(
+                "GAME OVER",
+                True,
+                (255, 255, 255)
+            )
+            screen.blit(
+                title,
+                (
+                    self.screen_width // 2
+                    - title.get_width() // 2,
+                    100
+                )
+            )
 
-            kills_text = self.font_small.render(f"Killed ducks: {self.kills}", True, (255, 255, 255))
-            screen.blit(kills_text, (self.screen_width // 2 - kills_text.get_width() // 2, 150))
+            kills_text = self.font_small.render(
+                f"Killed ducks: {self.kills}",
+                True,
+                (255, 255, 255)
+            )
+            screen.blit(
+                kills_text,
+                (
+                    self.screen_width // 2
+                    - kills_text.get_width() // 2,
+                    150
+                )
+            )
 
-            accuracy = 0 if self.shots == 0 else int((self.hits / self.shots) * 100)
-            acc_text = self.font_small.render(f"Accuracy: {accuracy}%", True, (255, 255, 255))
-            screen.blit(acc_text, (self.screen_width // 2 - acc_text.get_width() // 2, 180))
+            accuracy = 0 if self.shots == 0 else int(
+                (self.hits / self.shots) * 100
+            )
+            acc_text = self.font_small.render(
+                f"Accuracy: {accuracy}%",
+                True,
+                (255, 255, 255)
+            )
+            screen.blit(
+                acc_text,
+                (
+                    self.screen_width // 2
+                    - acc_text.get_width() // 2,
+                    180
+                )
+            )
 
-            pygame.draw.rect(screen, (0, 200, 0), pygame.Rect(100, 230, 100, 40))
-            r_text = self.font_small.render("Restart", True, (0, 0, 0))
+            pygame.draw.rect(
+                screen,
+                (0, 200, 0),
+                pygame.Rect(100, 230, 100, 40)
+            )
+            r_text = self.font_small.render(
+                "Restart",
+                True,
+                (0, 0, 0)
+            )
             screen.blit(r_text, (115, 238))
 
-            pygame.draw.rect(screen, (200, 0, 0), pygame.Rect(210, 230, 100, 40))
-            q_text = self.font_small.render("Quit", True, (0, 0, 0))
+            pygame.draw.rect(
+                screen,
+                (200, 0, 0),
+                pygame.Rect(210, 230, 100, 40)
+            )
+            q_text = self.font_small.render(
+                "Quit",
+                True,
+                (0, 0, 0)
+            )
             screen.blit(q_text, (240, 238))
