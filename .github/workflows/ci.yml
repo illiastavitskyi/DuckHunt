@@ -10,14 +10,14 @@ jobs:
 
     steps: 
       - name: CloneCode
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
+          python-version: '3.13'
 
-      - name: Install DEpendencies
+      - name: Install Dependencies
         run: | 
           python -m pip install --upgrade pip
           pip install -r requirements.txt
