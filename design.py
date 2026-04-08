@@ -17,4 +17,4 @@ class Design:
 
     def draw(self, screen):
         screen.blit(self.image, (0, 0))
-        
+
