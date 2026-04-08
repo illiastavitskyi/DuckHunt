@@ -1,5 +1,6 @@
 import pygame
 
+
 class Design:
     def __init__(self, width, height):
         self.width = width
@@ -16,3 +17,4 @@ class Design:
 
     def draw(self, screen):
         screen.blit(self.image, (0, 0))
+        
