@@ -25,6 +25,19 @@ jobs:
       - name: RunTests
         run: pytest --html=report.html
 
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v6
+        with:
+          name: pytest-report
+          path: pytest-report/pytest-report.html
+
+
       - name: Linter
         run: flake8 . --format=html --htmldir=flake-report
       
+
+      - name: Upload Linter Report
+        uses: actions/upload-artifact@v6
+        with:
+          name: flake-report
+          path: flake-report/flake-report.html
