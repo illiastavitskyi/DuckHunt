@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: pytest-report
-          path: pytest-report/pytest-report.html
+          path: pytest-report.html
 
 
       - name: Linter
@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: flake-report
-          path: flake-report/flake-report.html
+          path: flake-report
