@@ -3,8 +3,8 @@ def test_design_init():
     from design import Design
 
     pygame.init()
-    pygame.display.set_mode((1, 1))  # мінімальне вікно
+    pygame.display.set_mode((1, 1))
 
-    d = Design(400, 400)
+    design = Design(400, 400)
 
-    assert d is not None
+    assert design is not None
