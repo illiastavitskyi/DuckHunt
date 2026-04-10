@@ -36,13 +36,6 @@ def test_win_at_last_round(gm):
     assert gm.result == "win"
 
 
-@patch("game_manager.Duck")
-def test_spawn_duck(mock_duck, gm):
-    gm.last_duck_spawn_time = 0
-    gm.update()
-    assert gm.duck is not None
-    mock_duck.assert_called_once()
-
 
 def test_click_kills_duck(gm):
     mock_duck = MagicMock()

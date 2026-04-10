@@ -2,7 +2,7 @@ import pygame
 import sys
 import argparse
 from design import Design
-from gameManager import GameManager
+from game_manager import GameManager
 
 
 class Game:
