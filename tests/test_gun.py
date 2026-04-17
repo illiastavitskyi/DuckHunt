@@ -41,15 +41,15 @@ def test_draw_ammo(mock_rect):
     gun = Gun()
 
     class FakeScreen:
-       # def get_width(self):
-        #    return 200
+        def get_width(self):
+            return 200
 
         def get_height(self):
-        #    return 100
+            return 100
 
-    #screen = FakeScreen()
+    screen = FakeScreen()
 
-  #  gun.draw_ammo(screen)
+    gun.draw_ammo(screen)
 
     assert mock_rect.call_count == 5
 
